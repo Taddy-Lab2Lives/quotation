@@ -474,18 +474,6 @@ const createPDFHtml = (
         </div>
       </div>
 
-      <div class="summary-box">
-        <h4>${language === 'vi' ? 'TÓM TẮT DÒNG TIỀN 24 THÁNG' : '24-MONTH CASH FLOW SUMMARY'}</h4>
-        <div class="summary-item">
-          <span class="summary-label">${language === 'vi' ? 'Mua trả thẳng' : 'Direct Purchase'}:</span>
-          <span class="summary-value">${formatCurrency(result.purchase.totalTwoYearCost, language)}</span>
-        </div>
-        <div class="summary-item">
-          <span class="summary-label">${language === 'vi' ? 'Thuê hợp đồng' : 'Contract Rental'}:</span>
-          <span class="summary-value">${formatCurrency(result.rental.totalTwoYearCost, language)} ${language === 'vi' ? '(không bao gồm cọc)' : '(excl. deposit)'}</span>
-        </div>
-      </div>
-
       ${barChartDataUrl ? `
       <div class="section">
         <div class="section-header">
