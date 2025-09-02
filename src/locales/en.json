@@ -1,0 +1,76 @@
+{
+  "app": {
+    "title": "BenKon Quote Generator",
+    "subtitle": "Professional Hardware & Software Solutions"
+  },
+  "customer": {
+    "title": "Customer Information",
+    "name": "Customer Name",
+    "namePlaceholder": "Enter customer name",
+    "company": "Company Name",
+    "companyPlaceholder": "Enter company name (optional)",
+    "address": "Address",
+    "addressPlaceholder": "Enter address (optional)",
+    "contact": "Contact",
+    "contactPlaceholder": "Email or phone number (optional)",
+    "stores": "Number of Stores",
+    "storesPlaceholder": "Enter number of stores"
+  },
+  "costs": {
+    "title": "Cost Components",
+    "hardware": "Hardware Cost",
+    "software": "Software Cost (per year)",
+    "installation": "Installation Cost (per store)",
+    "setup": "Setup Service (per store)"
+  },
+  "comparison": {
+    "title": "Payment Method Comparison",
+    "purchase": "Direct Purchase",
+    "rental": "2-Year Contract Rental",
+    "month": "Month",
+    "amount": "Amount",
+    "cumulative": "Cumulative",
+    "totalCost": "Total 2-Year Cost",
+    "monthlyCost": "Monthly Cost",
+    "deposit": "Deposit (3 months - refundable)",
+    "initialPayment": "Initial Payment",
+    "secondYear": "Software Year 2",
+    "savings": "Savings"
+  },
+  "chart": {
+    "title": "Cost Comparison Chart",
+    "cumulativeCost": "Cumulative Cost Over 24 Months"
+  },
+  "actions": {
+    "calculate": "Calculate",
+    "export": "Export PDF",
+    "reset": "Reset",
+    "print": "Print Quote",
+    "generating": "Generating PDF..."
+  },
+  "pdf": {
+    "title": "QUOTATION",
+    "quoteNumber": "Quote Number",
+    "date": "Date",
+    "validUntil": "Valid Until",
+    "customerInfo": "Customer Information",
+    "costBreakdown": "Cost Breakdown",
+    "paymentComparison": "Payment Method Comparison",
+    "cashFlow": "Detailed Cash Flow",
+    "terms": "Terms & Conditions",
+    "termsContent": [
+      "• Rental: 3-month deposit required",
+      "• Purchase: 1-year hardware warranty",
+      "• Service commitment: 48-hour response time",
+      "• Additional costs may apply for customer-caused issues",
+      "• Quote valid for 30 days"
+    ],
+    "companyInfo": "BenKon Technology Solutions",
+    "website": "www.benkon.io"
+  },
+  "validation": {
+    "required": "This field is required",
+    "minValue": "Value must be greater than 0",
+    "invalidNumber": "Please enter a valid number"
+  }
+}

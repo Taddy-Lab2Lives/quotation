@@ -1,0 +1,76 @@
+{
+  "app": {
+    "title": "Trình Tạo Báo Giá BenKon",
+    "subtitle": "Giải pháp phần cứng và phần mềm chuyên nghiệp"
+  },
+  "customer": {
+    "title": "Thông Tin Khách Hàng",
+    "name": "Tên khách hàng",
+    "namePlaceholder": "Nhập tên khách hàng",
+    "company": "Tên công ty",
+    "companyPlaceholder": "Nhập tên công ty (tùy chọn)",
+    "address": "Địa chỉ",
+    "addressPlaceholder": "Nhập địa chỉ (tùy chọn)",
+    "contact": "Liên hệ",
+    "contactPlaceholder": "Email hoặc số điện thoại (tùy chọn)",
+    "stores": "Số lượng cửa hàng",
+    "storesPlaceholder": "Nhập số lượng cửa hàng"
+  },
+  "costs": {
+    "title": "Chi Phí Các Thành Phần",
+    "hardware": "Chi phí phần cứng",
+    "software": "Chi phí phần mềm (mỗi năm)",
+    "installation": "Chi phí lắp đặt (mỗi cửa hàng)",
+    "setup": "Dịch vụ thiết lập (mỗi cửa hàng)"
+  },
+  "comparison": {
+    "title": "So Sánh Phương Thức Thanh Toán",
+    "purchase": "Mua Trả Thẳng",
+    "rental": "Thuê hợp đồng 2 năm",
+    "month": "Tháng",
+    "amount": "Số tiền",
+    "cumulative": "Lũy kế",
+    "totalCost": "Tổng chi phí 2 năm",
+    "monthlyCost": "Chi phí hàng tháng",
+    "deposit": "Tiền đặt cọc (3 tháng - hoàn trả)",
+    "initialPayment": "Thanh toán ban đầu",
+    "secondYear": "Phần mềm năm 2",
+    "savings": "Tiết kiệm"
+  },
+  "chart": {
+    "title": "Biểu Đồ So Sánh Chi Phí",
+    "cumulativeCost": "Chi phí lũy kế trong 24 tháng"
+  },
+  "actions": {
+    "calculate": "Tính Toán",
+    "export": "Xuất PDF",
+    "reset": "Làm Mới",
+    "print": "In Báo Giá",
+    "generating": "Đang tạo PDF..."
+  },
+  "pdf": {
+    "title": "BÁO GIÁ",
+    "quoteNumber": "Số báo giá",
+    "date": "Ngày",
+    "validUntil": "Hiệu lực đến",
+    "customerInfo": "Thông Tin Khách Hàng",
+    "costBreakdown": "Chi Tiết Chi Phí",
+    "paymentComparison": "So Sánh Phương Thức Thanh Toán",
+    "cashFlow": "Dòng Tiền Chi Tiết",
+    "terms": "Điều Khoản & Điều Kiện",
+    "termsContent": [
+      "• Thuê: Yêu cầu đặt cọc 3 tháng",
+      "• Mua: Bảo hành phần cứng 1 năm",
+      "• Cam kết dịch vụ: Phản hồi trong 48 giờ",
+      "• Chi phí bổ sung có thể áp dụng cho các sự cố do khách hàng gây ra",
+      "• Báo giá có hiệu lực trong 30 ngày"
+    ],
+    "companyInfo": "BenKon Technology Solutions",
+    "website": "www.benkon.io"
+  },
+  "validation": {
+    "required": "Trường này là bắt buộc",
+    "minValue": "Giá trị phải lớn hơn 0",
+    "invalidNumber": "Vui lòng nhập số hợp lệ"
+  }
+}
