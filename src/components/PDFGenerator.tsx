@@ -28,11 +28,20 @@ const PDFGenerator: React.FC<PDFGeneratorProps> = ({ customer, costs, result, ch
     try {
       const chartElement = chartRef.current;
       await generatePDF(customer, costs, result, chartElement, i18n.language as 'vi' | 'en');
+      
+      // Success notification
+      const successMsg = i18n.language === 'vi' 
+        ? 'PDF đã được tạo và tải xuống thành công!' 
+        : 'PDF generated and downloaded successfully!';
+      alert(successMsg);
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert(i18n.language === 'vi'
-        ? 'Có lỗi xảy ra khi tạo PDF. Vui lòng thử lại.'
-        : 'An error occurred while generating the PDF. Please try again.');
+      const errorMsg = error instanceof Error ? error.message : (
+        i18n.language === 'vi'
+          ? 'Có lỗi xảy ra khi tạo PDF. Vui lòng thử lại.'
+          : 'An error occurred while generating the PDF. Please try again.'
+      );
+      alert(errorMsg);
     } finally {
       setIsGenerating(false);
     }
