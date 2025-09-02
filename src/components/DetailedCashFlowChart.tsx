@@ -31,7 +31,7 @@ interface DetailedCashFlowChartProps {
 }
 
 const DetailedCashFlowChart: React.FC<DetailedCashFlowChartProps> = ({ result }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const isVietnamese = i18n.language === 'vi';
 
   if (!result) return null;
