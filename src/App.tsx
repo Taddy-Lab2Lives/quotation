@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import QuoteForm from './components/QuoteForm';
 import CostCalculator from './components/CostCalculator';
-import ComparisonChart from './components/ComparisonChart';
 import CashFlowTable from './components/CashFlowTable';
 import CashFlowBarChart from './components/CashFlowBarChart';
 import DetailedCashFlowChart from './components/DetailedCashFlowChart';
@@ -19,7 +18,6 @@ function App() {
   const [costs, setCosts] = useState<CostComponents | null>(null);
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [showResults, setShowResults] = useState(false);
-  const chartRef = useRef<HTMLDivElement>(null);
   const barChartRef = useRef<HTMLDivElement>(null);
   const detailedChartRef = useRef<HTMLDivElement>(null);
 
@@ -101,13 +99,6 @@ function App() {
             {/* Cost Calculator Summary */}
             <CostCalculator result={result} />
 
-            {/* Comparison Chart */}
-            <div ref={chartRef}>
-              <ComparisonChart result={result} />
-            </div>
-
-            {/* Cash Flow Table */}
-            <CashFlowTable result={result} />
 
             {/* Cash Flow Bar Chart */}
             <div ref={barChartRef}>
@@ -119,13 +110,15 @@ function App() {
               <DetailedCashFlowChart result={result} />
             </div>
 
+            {/* Cash Flow Table */}
+            <CashFlowTable result={result} />
+
             {/* PDF Generator Actions */}
             <div className="flex justify-center py-8">
               <PDFGenerator 
                 customer={customer} 
                 costs={costs} 
                 result={result} 
-                chartRef={chartRef}
                 barChartRef={barChartRef}
                 detailedChartRef={detailedChartRef}
               />
