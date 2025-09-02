@@ -9,7 +9,9 @@ const createPDFHtml = (
   costs: CostComponents,
   result: CalculationResult,
   language: 'vi' | 'en',
-  chartDataUrl?: string
+  chartDataUrl?: string,
+  barChartDataUrl?: string,
+  detailedChartDataUrl?: string
 ) => {
   const today = new Date();
   const validUntil = addDays(today, 30);
@@ -57,12 +59,12 @@ const createPDFHtml = (
         body {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
           margin: 0;
-          padding: 30px;
+          padding: 72px;
           font-size: 12px;
           line-height: 1.4;
           color: #333;
           background: white;
-          width: 740px;
+          width: 648px;
           box-sizing: border-box;
         }
         
@@ -70,7 +72,7 @@ const createPDFHtml = (
           background: #0066CC;
           color: white;
           padding: 15px 20px;
-          margin: -30px -30px 20px -30px;
+          margin: -72px -72px 20px -72px;
           position: relative;
         }
         
@@ -209,7 +211,7 @@ const createPDFHtml = (
           color: white;
           text-align: center;
           padding: 10px;
-          margin: 30px -30px -30px -30px;
+          margin: 30px -72px -72px -72px;
           font-size: 10px;
         }
         
@@ -221,7 +223,7 @@ const createPDFHtml = (
         }
         
         .chart-container img {
-          max-width: 680px;
+          max-width: 580px;
           width: 100%;
           height: auto;
           border: 1px solid #e5e5e5;
@@ -318,13 +320,80 @@ const createPDFHtml = (
         <div>${language === 'vi' ? 'Thuê hợp đồng' : 'Contract Rental'}: <strong>${formatCurrency(result.rental.totalTwoYearCost, language)}</strong> ${language === 'vi' ? '(không bao gồm cọc)' : '(excl. deposit)'}</div>
       </div>
 
-      ${chartDataUrl ? `
       <div class="section">
         <div class="section-header">
-          ${language === 'vi' ? 'BIỂU ĐỒ DÒNG TIỀN 24 THÁNG' : '24-MONTH CASH FLOW CHART'}
+          ${language === 'vi' ? 'DÒNG TIỀN CHI TIẾT 24 THÁNG' : 'DETAILED 24-MONTH CASH FLOW'}
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+          <thead>
+            <tr style="border-bottom: 2px solid #ddd; background: #f8f9fa;">
+              <th style="text-align: left; padding: 8px; font-weight: 600;">${language === 'vi' ? 'Tháng' : 'Month'}</th>
+              <th style="text-align: right; padding: 8px; font-weight: 600; color: #3B82F6;" colspan="2">${language === 'vi' ? 'Mua trả thẳng' : 'Direct Purchase'}</th>
+              <th style="text-align: right; padding: 8px; font-weight: 600; color: #9333EA;" colspan="2">${language === 'vi' ? 'Thuê hợp đồng' : 'Contract Rental'}</th>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd; background: #f8f9fa; font-size: 9px; color: #666;">
+              <th style="padding: 6px;"></th>
+              <th style="text-align: right; padding: 6px;">${language === 'vi' ? 'Số tiền' : 'Amount'}</th>
+              <th style="text-align: right; padding: 6px;">${language === 'vi' ? 'Tích lũy' : 'Cumulative'}</th>
+              <th style="text-align: right; padding: 6px;">${language === 'vi' ? 'Số tiền' : 'Amount'}</th>
+              <th style="text-align: right; padding: 6px;">${language === 'vi' ? 'Tích lũy' : 'Cumulative'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${result.purchase.cashFlow.slice(0, 25).map((purchasePayment, index) => {
+              const rentalPayment = result.rental.cashFlow[index];
+              const isHighlight = index === 0 || index === 13 || index === 24;
+              return `
+                <tr style="border-bottom: 1px solid #eee; ${isHighlight ? 'background: #fffbeb;' : ''}">
+                  <td style="padding: 6px; font-weight: 500;">${language === 'vi' ? 'Tháng' : 'Month'} ${index}${index === 0 ? ` (${language === 'vi' ? 'Hiện tại' : 'Now'})` : ''}</td>
+                  <td style="text-align: right; padding: 6px; ${purchasePayment.amount > 0 ? 'font-weight: 600; color: #3B82F6;' : 'color: #999;'}">
+                    ${purchasePayment.amount > 0 ? formatCurrency(purchasePayment.amount, language) : '-'}
+                  </td>
+                  <td style="text-align: right; padding: 6px; color: #666;">
+                    ${formatCurrency(purchasePayment.cumulativeAmount, language)}
+                  </td>
+                  <td style="text-align: right; padding: 6px; ${rentalPayment.amount > 0 ? 'font-weight: 600; color: #9333EA;' : 'color: #999;'}">
+                    ${rentalPayment.amount > 0 ? formatCurrency(rentalPayment.amount, language) : '-'}
+                  </td>
+                  <td style="text-align: right; padding: 6px; color: #666;">
+                    ${formatCurrency(rentalPayment.cumulativeAmount, language)}
+                  </td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+          <tfoot>
+            <tr style="background: #f1f5f9; font-weight: 600; border-top: 2px solid #ddd;">
+              <td style="padding: 10px; color: #374151;">${language === 'vi' ? 'Tổng cộng' : 'Total'}</td>
+              <td style="text-align: right; padding: 10px; color: #3B82F6; font-size: 11px;" colspan="2">
+                ${formatCurrency(result.purchase.totalTwoYearCost, language)}
+              </td>
+              <td style="text-align: right; padding: 10px; color: #9333EA; font-size: 11px;" colspan="2">
+                ${formatCurrency(result.rental.totalTwoYearCost, language)}
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      ${barChartDataUrl ? `
+      <div class="section">
+        <div class="section-header">
+          ${language === 'vi' ? 'BIỂU ĐỒ THANH TOÁN HÀNG THÁNG' : 'MONTHLY PAYMENT CHART'}
         </div>
         <div class="chart-container">
-          <img src="${chartDataUrl}" alt="${language === 'vi' ? 'Biểu đồ dòng tiền' : 'Cash flow chart'}" />
+          <img src="${barChartDataUrl}" alt="${language === 'vi' ? 'Biểu đồ thanh toán' : 'Payment chart'}" />
+        </div>
+      </div>
+      ` : ''}
+
+      ${detailedChartDataUrl ? `
+      <div class="section">
+        <div class="section-header">
+          ${language === 'vi' ? 'BIỂU ĐỒ DÒNG TIỀN TÍCH LŨY' : 'CUMULATIVE CASH FLOW CHART'}
+        </div>
+        <div class="chart-container">
+          <img src="${detailedChartDataUrl}" alt="${language === 'vi' ? 'Biểu đồ dòng tiền tích lũy' : 'Cumulative cash flow chart'}" />
         </div>
       </div>
       ` : ''}
@@ -352,24 +421,41 @@ export async function generatePDF(
   costs: CostComponents,
   result: CalculationResult,
   chartElement: HTMLElement | null,
+  barChartElement: HTMLElement | null,
+  detailedChartElement: HTMLElement | null,
   language: 'vi' | 'en'
 ): Promise<void> {
   try {
-    // Capture chart as image if available
+    // Capture charts as images if available
     let chartDataUrl: string | undefined;
+    let barChartDataUrl: string | undefined;
+    let detailedChartDataUrl: string | undefined;
+
+    const chartConfig = {
+      scale: 2,
+      backgroundColor: '#ffffff',
+      useCORS: true,
+      allowTaint: false,
+      logging: false
+    };
+
     if (chartElement) {
-      const chartCanvas = await html2canvas(chartElement, {
-        scale: 2,
-        backgroundColor: '#ffffff',
-        useCORS: true,
-        allowTaint: false,
-        logging: false
-      });
+      const chartCanvas = await html2canvas(chartElement, chartConfig);
       chartDataUrl = chartCanvas.toDataURL('image/png');
     }
 
+    if (barChartElement) {
+      const barChartCanvas = await html2canvas(barChartElement, chartConfig);
+      barChartDataUrl = barChartCanvas.toDataURL('image/png');
+    }
+
+    if (detailedChartElement) {
+      const detailedChartCanvas = await html2canvas(detailedChartElement, chartConfig);
+      detailedChartDataUrl = detailedChartCanvas.toDataURL('image/png');
+    }
+
     // Create HTML content for PDF
-    const htmlContent = createPDFHtml(customer, costs, result, language, chartDataUrl);
+    const htmlContent = createPDFHtml(customer, costs, result, language, chartDataUrl, barChartDataUrl, detailedChartDataUrl);
     
     // Create a temporary div to render HTML
     const tempDiv = document.createElement('div');

@@ -1,12 +1,12 @@
 # BenKon Quote Generator
 
-A modern, professional web application for generating quotes for BenKon products (hardware + software solutions). The app allows easy input of costs, automatic calculation of rental vs purchase options, and generates PDF quotes with comparison charts.
+A modern, professional web application for generating quotes for BenKon energy efficiency solutions. The app allows easy input of costs, automatic calculation of rental vs purchase options, and generates PDF quotes with comparison charts.
 
 ## Features
 
 - **Bilingual Support**: Vietnamese and English language toggle
 - **Customer Information Management**: Store customer details with auto-save functionality
-- **Cost Components**: Customizable hardware, software, installation, and setup costs
+- **Cost Components**: Customizable hardware, software, installation, and setup costs for energy efficiency solutions
 - **Automatic Calculations**: Real-time calculation of purchase vs rental options
 - **Visual Comparisons**: Interactive charts showing cost comparisons over 24 months
 - **Cash Flow Analysis**: Detailed month-by-month payment breakdown
@@ -89,4 +89,4 @@ The app can be deployed to any static hosting service:
 
 ## License
 
-© 2024 BenKon Technology Solutions. All rights reserved.
+© 2024 BenKon Energy Efficiency Solutions. All rights reserved.

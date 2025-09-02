@@ -5,6 +5,7 @@ import CostCalculator from './components/CostCalculator';
 import ComparisonChart from './components/ComparisonChart';
 import CashFlowTable from './components/CashFlowTable';
 import CashFlowBarChart from './components/CashFlowBarChart';
+import DetailedCashFlowChart from './components/DetailedCashFlowChart';
 import PDFGenerator from './components/PDFGenerator';
 import LanguageToggle from './components/LanguageToggle';
 import { CustomerInfo, CostComponents, CalculationResult } from './types/quote';
@@ -19,6 +20,8 @@ function App() {
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [showResults, setShowResults] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
+  const barChartRef = useRef<HTMLDivElement>(null);
+  const detailedChartRef = useRef<HTMLDivElement>(null);
 
   // Load preferred language on mount
   useEffect(() => {
@@ -107,7 +110,14 @@ function App() {
             <CashFlowTable result={result} />
 
             {/* Cash Flow Bar Chart */}
-            <CashFlowBarChart result={result} />
+            <div ref={barChartRef}>
+              <CashFlowBarChart result={result} />
+            </div>
+
+            {/* Detailed Cash Flow Chart */}
+            <div ref={detailedChartRef}>
+              <DetailedCashFlowChart result={result} />
+            </div>
 
             {/* PDF Generator Actions */}
             <div className="flex justify-center py-8">
@@ -115,7 +125,9 @@ function App() {
                 customer={customer} 
                 costs={costs} 
                 result={result} 
-                chartRef={chartRef} 
+                chartRef={chartRef}
+                barChartRef={barChartRef}
+                detailedChartRef={detailedChartRef}
               />
             </div>
           </div>
@@ -126,7 +138,7 @@ function App() {
       <footer className="bg-gray-900 text-white mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <p className="text-lg font-semibold mb-2">BenKon Technology Solutions</p>
+            <p className="text-lg font-semibold mb-2">BenKon Energy Efficiency Solutions</p>
             <p className="text-gray-400">www.benkon.io | support@benkon.io</p>
             <p className="text-sm text-gray-500 mt-4">
               © {new Date().getFullYear()} BenKon. All rights reserved.

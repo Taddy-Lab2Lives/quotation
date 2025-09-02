@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Trình Tạo Báo Giá BenKon",
-    "subtitle": "Giải pháp phần cứng và phần mềm chuyên nghiệp"
+    "subtitle": "Giải pháp sử dụng năng lượng hiệu quả và tối ưu vận hành"
   },
   "customer": {
     "title": "Thông Tin Khách Hàng",
@@ -65,7 +65,7 @@
       "• Chi phí bổ sung có thể áp dụng cho các sự cố do khách hàng gây ra",
       "• Báo giá có hiệu lực trong 30 ngày"
     ],
-    "companyInfo": "BenKon Technology Solutions",
+    "companyInfo": "BenKon Energy Efficiency Solutions",
     "website": "www.benkon.io"
   },
   "validation": {

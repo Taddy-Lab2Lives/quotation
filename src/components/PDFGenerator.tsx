@@ -9,9 +9,11 @@ interface PDFGeneratorProps {
   costs: CostComponents | null;
   result: CalculationResult | null;
   chartRef: React.RefObject<HTMLDivElement>;
+  barChartRef: React.RefObject<HTMLDivElement>;
+  detailedChartRef: React.RefObject<HTMLDivElement>;
 }
 
-const PDFGenerator: React.FC<PDFGeneratorProps> = ({ customer, costs, result, chartRef }) => {
+const PDFGenerator: React.FC<PDFGeneratorProps> = ({ customer, costs, result, chartRef, barChartRef, detailedChartRef }) => {
   const { t, i18n } = useTranslation();
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -27,7 +29,9 @@ const PDFGenerator: React.FC<PDFGeneratorProps> = ({ customer, costs, result, ch
     
     try {
       const chartElement = chartRef.current;
-      await generatePDF(customer, costs, result, chartElement, i18n.language as 'vi' | 'en');
+      const barChartElement = barChartRef.current;
+      const detailedChartElement = detailedChartRef.current;
+      await generatePDF(customer, costs, result, chartElement, barChartElement, detailedChartElement, i18n.language as 'vi' | 'en');
       
       // Success notification
       const successMsg = i18n.language === 'vi' 

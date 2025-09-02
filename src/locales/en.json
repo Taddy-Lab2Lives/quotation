@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "BenKon Quote Generator",
-    "subtitle": "Professional Hardware & Software Solutions"
+    "subtitle": "Energy Efficiency & Operational Optimization Solutions"
   },
   "customer": {
     "title": "Customer Information",
@@ -65,7 +65,7 @@
       "• Additional costs may apply for customer-caused issues",
       "• Quote valid for 30 days"
     ],
-    "companyInfo": "BenKon Technology Solutions",
+    "companyInfo": "BenKon Energy Efficiency Solutions",
     "website": "www.benkon.io"
   },
   "validation": {
