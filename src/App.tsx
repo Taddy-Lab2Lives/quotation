@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import QuoteForm from './components/QuoteForm';
 import CostCalculator from './components/CostCalculator';
 import CashFlowTable from './components/CashFlowTable';
 import CashFlowBarChart from './components/CashFlowBarChart';
 import DetailedCashFlowChart from './components/DetailedCashFlowChart';
-import PDFGenerator from './components/PDFGenerator';
 import LanguageToggle from './components/LanguageToggle';
 import { CustomerInfo, CostComponents, CalculationResult } from './types/quote';
 import { calculateOptions } from './utils/calculations';
@@ -14,12 +13,10 @@ import './i18n';
 
 function App() {
   const { t, i18n } = useTranslation();
-  const [customer, setCustomer] = useState<CustomerInfo | null>(null);
-  const [costs, setCosts] = useState<CostComponents | null>(null);
+  const [, setCustomer] = useState<CustomerInfo | null>(null);
+  const [, setCosts] = useState<CostComponents | null>(null);
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [showResults, setShowResults] = useState(false);
-  const barChartRef = useRef<HTMLDivElement>(null);
-  const detailedChartRef = useRef<HTMLDivElement>(null);
 
   // Load preferred language on mount
   useEffect(() => {
@@ -101,28 +98,14 @@ function App() {
 
 
             {/* Cash Flow Bar Chart */}
-            <div ref={barChartRef}>
-              <CashFlowBarChart result={result} />
-            </div>
+            <CashFlowBarChart result={result} />
 
             {/* Detailed Cash Flow Chart */}
-            <div ref={detailedChartRef}>
-              <DetailedCashFlowChart result={result} />
-            </div>
+            <DetailedCashFlowChart result={result} />
 
             {/* Cash Flow Table */}
             <CashFlowTable result={result} />
 
-            {/* PDF Generator Actions */}
-            <div className="flex justify-center py-8">
-              <PDFGenerator 
-                customer={customer} 
-                costs={costs} 
-                result={result} 
-                barChartRef={barChartRef}
-                detailedChartRef={detailedChartRef}
-              />
-            </div>
           </div>
         )}
       </main>
@@ -140,25 +123,7 @@ function App() {
         </div>
       </footer>
 
-      {/* Print Styles */}
       <style>{`
-        @media print {
-          body * {
-            visibility: hidden;
-          }
-          #results, #results * {
-            visibility: visible;
-          }
-          #results {
-            position: absolute;
-            left: 0;
-            top: 0;
-          }
-          header, footer, button {
-            display: none !important;
-          }
-        }
-        
         @keyframes fadeIn {
           from {
             opacity: 0;
